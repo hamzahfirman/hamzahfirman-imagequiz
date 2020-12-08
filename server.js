@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended: true}));
 
 // METHOD: GET
 app.get('/' , (request, response) => {
-    response.json("Welcome to Image Quiz API!");
+    response.send("Welcome to Image Quiz API!");
 })
 // METHOD: GET
 app.get('/quizzes' , (request, response) => {
