@@ -4,16 +4,17 @@
 //Date  : 12/08/20
 
 const express = require('express');
-var cors = require('cors'); // This gives access to public (whoever wants to use this API)
-let data = require('./data');
 const app = express();
+var cors = require('cors'); // This gives access to public (whoever wants to use this API)
+var data = require('./data');
+var bodyParser = require('body-parser');
 const port = process.env.PORT || 3002; //'process.env.PORT' - Needed for production where a host can choose 
                                        // its own preference PORT for this API (Detail: Reads 'env' file and 
                                        // looks for 'PORT' key to get the port number)
 
 // Middlewares
 app.use(cors()); 
-app.use(express.json()); // Converts into JSON 
+app.use(bodyParser.json()); // Converts into JSON 
 app.use(express.urlencoded({extended: true}));
 
 
@@ -38,9 +39,10 @@ app.get('/quizzes' , (request, response) => {
 // METHOD: GET
 app.get('/quiz/:id' , (request, response) => {
 let searchFor = request.params.id;
-let found = data.quizzes.find(x => x.id === searchFor);
+
+let found = data.quizzes.find(x => x.id === Number(searchFor));
 if(found) {
-    response.json(found);
+    response.json(found.questions);
 }
 else{
     response.status(404).json({error: `The type ${searchFor} could not be found.`})
@@ -49,8 +51,11 @@ else{
 })
 // METHOD: POST
 app.post('/score', (request, response) =>{
-    let score = request.body;
-    data.scores.push(score);
+    let username = request.body.username;
+    let quizid   = request.body.quizid;
+    let score    = request.body.score;
+    //Stores the given data from a user in JSON 
+    data.scores.push({score:score, quizid: quizid, username: username});
     response.json({message:'The score saved successfully.'})
 });
 
