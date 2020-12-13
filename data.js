@@ -171,7 +171,7 @@ let math6 = {
 
 
 let flowers= {
-            name: 'quiz 1', id:1, image: 'quiz1,png', 
+            name: 'flowers', id:1, image:"sunflower3.png", 
             questions:[
                 flower1,
                 flower2,
@@ -182,7 +182,7 @@ let flowers= {
             ]
             };
 let animals = {
-            name: 'quiz 1', id:2, image: 'quiz1,png', 
+            name: 'animals', id:2, image:"animal1.png", 
             questions:[
                 animal1,
                 animal2,
@@ -192,7 +192,7 @@ let animals = {
                 animal6
             ]};
 let mathematics = {
-                name: 'quiz 1', id:3, image: 'quiz1,png', 
+                name: 'mathematics', id:3, image:"math.png", 
                 questions:[
                     math1,
                     math2,
